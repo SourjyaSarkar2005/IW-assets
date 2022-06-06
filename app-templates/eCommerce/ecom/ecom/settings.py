@@ -14,12 +14,12 @@ from pathlib import Path
 
 # Importine dotenv
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 load_dotenv()  # loads the configs from .env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+TEMPLATE_DIR = os.path.join(BASE_DIR, "ecom", "templates")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -34,6 +34,11 @@ DB_PASSWORD = str(os.getenv('DB_PASSWORD'))
 DB_PORT = str(os.getenv('DB_PORT'))
 DB_HOST = str(os.getenv('DB_HOST'))
 
+# Auth0 details
+AUTH0_DOMAIN = str(os.getenv("AUTH0_DOMAIN"))
+AUTH0_CLIENT_ID = str(os.getenv("AUTH0_CLIENT_ID"))
+AUTH0_CLIENT_SECRET = (os.getenv("AUTH0_CLIENT_SECRET"))
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -43,6 +48,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,7 +72,7 @@ ROOT_URLCONF = 'ecom.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        "DIRS": [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
