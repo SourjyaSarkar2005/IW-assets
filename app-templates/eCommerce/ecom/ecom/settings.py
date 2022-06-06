@@ -27,6 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
+# Database details
+DB_NAME = str(os.getenv('DB_NAME'))
+DB_USER = str(os.getenv('DB_USER'))
+DB_PASSWORD = str(os.getenv('DB_PASSWORD'))
+DB_PORT = str(os.getenv('DB_PORT'))
+DB_HOST = str(os.getenv('DB_HOST'))
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -80,8 +87,12 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
 
